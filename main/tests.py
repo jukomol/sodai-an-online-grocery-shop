@@ -11,7 +11,7 @@ class ItemModelTest(TestCase):
     def setUp(self):
         item = Item()
         item.title = 'Potato'
-        item.price = 25.00
+        item.price = 250.00
         item.slug = "item_name"
         item.save()
 
@@ -38,10 +38,6 @@ class ItemModelTest(TestCase):
         items = Item.objects.all()
         for item in items:
             self.assertEqual(item.pieces, 6)
-
-    def test_get_absolute_url(self):
-        url = reverse("main:dishes", kwargs={"slug": "item_name"})
-        self.assertEqual("/dishes/item_name/", url)
 
     def test_get_add_to_cart_url(self):
         url = reverse("main:add-to-cart", kwargs={"slug": "item_name"})
@@ -113,6 +109,3 @@ class TestCartItemsModels(TestCase):
         url = reverse("main:remove-from-cart", kwargs={"pk": "1"})
         self.assertEqual("/remove-from-cart/1/", url)
 
-    def test_update_status_url(self):
-        url = reverse("main:update_status", kwargs={"pk": "0"})
-        self.assertEqual("/update_status/0/", url)
